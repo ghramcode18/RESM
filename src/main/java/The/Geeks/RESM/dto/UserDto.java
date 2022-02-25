@@ -5,25 +5,24 @@ import java.util.Objects;
 
 public class UserDto {
     
-    private String email;
+    private String userName;
 
     private String password;
-    
 
     public UserDto() {
     }
 
-    public UserDto(String email, String password) {
-        this.email = email;
+    public UserDto(String userName, String password) {
+        this.userName = userName;
         this.password = password;
     }
 
-    public String getEmail() {
-        return this.email;
+    public String getUserName() {
+        return this.userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -34,8 +33,8 @@ public class UserDto {
         this.password = password;
     }
 
-    public UserDto email(String email) {
-        setEmail(email);
+    public UserDto userName(String userName) {
+        setUserName(userName);
         return this;
     }
 
@@ -52,20 +51,20 @@ public class UserDto {
             return false;
         }
         UserDto userDto = (UserDto) o;
-        return Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password);
+        return Objects.equals(userName, userDto.userName) && Objects.equals(password, userDto.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password);
+        return Objects.hash(userName, password);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " email='" + getEmail() + "'" +
+            " userName='" + getUserName() + "'" +
             ", password='" + getPassword() + "'" +
             "}";
     }
-
+    
 }
