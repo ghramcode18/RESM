@@ -28,11 +28,12 @@ public class UserEntity {
 
     private String userName;
 
-    private String password;
+    private String password;        
 
 
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "users_added_to_estates")
     private List<EstatesEntity> estates;
+
 
     public UserEntity() {
     }
