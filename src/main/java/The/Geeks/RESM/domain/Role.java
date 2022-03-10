@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Entity @Data
 @Setter 
 @Getter
 public class Role {

@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 @RestController
 @RequestMapping("/api/login")
-@RequiredArgsConstructor 
 
 public class UserResource {
      private final UserService userService;
