@@ -17,11 +17,9 @@ import The.Geeks.RESM.domain.Role;
 import The.Geeks.RESM.domain.User;
 import The.Geeks.RESM.repositories.RoleRepo;
 import The.Geeks.RESM.repositories.UserRepo;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 @Slf4j
 public class UserServicesImp implements UserService, UserDetailsService {

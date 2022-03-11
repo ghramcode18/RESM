@@ -12,8 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import The.Geeks.RESM.domain.Role;
 import The.Geeks.RESM.domain.User;
 import The.Geeks.RESM.services.UserService;
-
 @SpringBootApplication
+
 public class ResmApplication {
 
 	public static void main(String[] args) {
