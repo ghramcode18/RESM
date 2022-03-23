@@ -4,21 +4,27 @@ import java.util.Date;
 import java.util.Objects;
 
 public class EstatesDto {
-    
+    private Integer id;
     private String buyerName;
     private String propertyName;
-    private double sellingPrice ;
-    private double price ;
+    private double sellingPrice;
+    private double price;
     private Integer sharesNumber;
     private Date sale_date;
-
-
-
 
     public EstatesDto() {
     }
 
-    public EstatesDto(String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public EstatesDto(String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber,
+            Date sale_date) {
         this.buyerName = buyerName;
         this.propertyName = propertyName;
         this.sellingPrice = sellingPrice;
@@ -113,7 +119,10 @@ public class EstatesDto {
             return false;
         }
         EstatesDto estatesDto = (EstatesDto) o;
-        return Objects.equals(buyerName, estatesDto.buyerName) && Objects.equals(propertyName, estatesDto.propertyName) && sellingPrice == estatesDto.sellingPrice && price == estatesDto.price && Objects.equals(sharesNumber, estatesDto.sharesNumber) && Objects.equals(sale_date, estatesDto.sale_date);
+        return Objects.equals(buyerName, estatesDto.buyerName) && Objects.equals(propertyName, estatesDto.propertyName)
+                && sellingPrice == estatesDto.sellingPrice && price == estatesDto.price
+                && Objects.equals(sharesNumber, estatesDto.sharesNumber)
+                && Objects.equals(sale_date, estatesDto.sale_date);
     }
 
     @Override
@@ -124,13 +133,13 @@ public class EstatesDto {
     @Override
     public String toString() {
         return "{" +
-            " buyerName='" + getBuyerName() + "'" +
-            ", propertyName='" + getPropertyName() + "'" +
-            ", sellingPrice='" + getSellingPrice() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", sharesNumber='" + getSharesNumber() + "'" +
-            ", sale_date='" + getSale_date() + "'" +
-            "}";
+                " buyerName='" + getBuyerName() + "'" +
+                ", propertyName='" + getPropertyName() + "'" +
+                ", sellingPrice='" + getSellingPrice() + "'" +
+                ", price='" + getPrice() + "'" +
+                ", sharesNumber='" + getSharesNumber() + "'" +
+                ", sale_date='" + getSale_date() + "'" +
+                "}";
     }
-    
+
 }

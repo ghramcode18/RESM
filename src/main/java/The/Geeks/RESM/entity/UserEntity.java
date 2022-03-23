@@ -1,12 +1,16 @@
 package The.Geeks.RESM.entity;
 
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +36,13 @@ public class UserEntity {
 
 
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "users_added_to_estates")
+         
+//    @ManyToMany  //(fetch = FetchType.LAZY, targetEntity = EstatesEntity.class)
+//    @JoinTable(
+//    name = "estates_user", 
+//    joinColumns = @JoinColumn(name = "user_id"), 
+//    inverseJoinColumns = @JoinColumn(name = "estate_id"))
+    //@ManyToMany
     private List<EstatesEntity> estates;
 
 

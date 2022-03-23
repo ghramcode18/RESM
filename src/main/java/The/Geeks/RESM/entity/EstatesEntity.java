@@ -18,6 +18,8 @@ import javax.persistence.JoinColumn;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.springframework.lang.Nullable;
+
 @Entity
 @Table(name  = "estates")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -37,11 +39,13 @@ public class EstatesEntity {
     private Date sale_date;
 
       
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-    @JoinTable(
-    name = "user_estates", 
-    joinColumns = @JoinColumn(name = "estate_id"), 
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+   @ManyToMany(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+   @JoinTable(
+   name = "estates_add_to_users", 
+   joinColumns = @JoinColumn(name = "estate_id"), 
+   inverseJoinColumns = @JoinColumn(name = "user_id"))
+
+   // @ManyToMany  //(fetch = FetchType.LAZY,mappedBy = "estates")
     private List <UserEntity>users_added_to_estates;
    
 

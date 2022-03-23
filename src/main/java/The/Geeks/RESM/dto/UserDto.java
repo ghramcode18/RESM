@@ -1,6 +1,5 @@
 package The.Geeks.RESM.dto;
 
-
 import java.util.Objects;
 
 public class UserDto {
@@ -9,7 +8,6 @@ public class UserDto {
     private String userName;
 
     private String password;
-
 
     public UserDto() {
     }
@@ -67,7 +65,8 @@ public class UserDto {
             return false;
         }
         UserDto userDto = (UserDto) o;
-        return Objects.equals(id, userDto.id) && Objects.equals(userName, userDto.userName) && Objects.equals(password, userDto.password);
+        return Objects.equals(id, userDto.id) && Objects.equals(userName, userDto.userName)
+                && Objects.equals(password, userDto.password);
     }
 
     @Override
@@ -78,10 +77,12 @@ public class UserDto {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", userName='" + getUserName() + "'" +
+                ", password='" + getPassword() + "'" +
+                "}";
     }
-    
+
+   
+
 }
