@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,46 +15,43 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import org.springframework.lang.Nullable;
 
+import The.Geeks.RESM.dto.EstatesDto;
+
 @Entity
-@Table(name  = "estates")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "estates")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+property = "id")
 
 public class EstatesEntity {
-    
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     private String buyerName;
     private String propertyName;
-    private double sellingPrice ;
-    private double price ;
+    private double sellingPrice;
+    private double price;
     private Integer sharesNumber;
     private Date sale_date;
 
-      
-   @ManyToMany(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-   @JoinTable(
-   name = "estates_add_to_users", 
-   joinColumns = @JoinColumn(name = "estate_id"), 
-   inverseJoinColumns = @JoinColumn(name = "user_id"))
-
-   // @ManyToMany  //(fetch = FetchType.LAZY,mappedBy = "estates")
-    private List <UserEntity>users_added_to_estates;
-   
-
+    @ManyToMany(targetEntity = UserEntity.class)
+    @JoinTable(
+    name = "users_estates", 
+    joinColumns = @JoinColumn(name = "estates_id"), 
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<UserEntity> list_Estate;
 
     public EstatesEntity() {
     }
 
-    public EstatesEntity(Integer id, String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date, List<UserEntity> users_added_to_estates) {
+    public EstatesEntity(Integer id, String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date, List<UserEntity> list_Estate) {
         this.id = id;
         this.buyerName = buyerName;
         this.propertyName = propertyName;
@@ -61,7 +59,7 @@ public class EstatesEntity {
         this.price = price;
         this.sharesNumber = sharesNumber;
         this.sale_date = sale_date;
-        this.users_added_to_estates = users_added_to_estates;
+        this.list_Estate = list_Estate;
     }
 
     public Integer getId() {
@@ -120,12 +118,12 @@ public class EstatesEntity {
         this.sale_date = sale_date;
     }
 
-    public List<UserEntity> getUsers_added_to_estates() {
-        return this.users_added_to_estates;
+    public List<UserEntity> getList_Estate() {
+        return this.list_Estate;
     }
 
-    public void setUsers_added_to_estates(List<UserEntity> users_added_to_estates) {
-        this.users_added_to_estates = users_added_to_estates;
+    public void setList_Estate(List<UserEntity> list_Estate) {
+        this.list_Estate = list_Estate;
     }
 
     public EstatesEntity id(Integer id) {
@@ -163,8 +161,8 @@ public class EstatesEntity {
         return this;
     }
 
-    public EstatesEntity users_added_to_estates(List<UserEntity> users_added_to_estates) {
-        setUsers_added_to_estates(users_added_to_estates);
+    public EstatesEntity list_Estate(List<UserEntity> list_Estate) {
+        setList_Estate(list_Estate);
         return this;
     }
 
@@ -176,12 +174,12 @@ public class EstatesEntity {
             return false;
         }
         EstatesEntity estatesEntity = (EstatesEntity) o;
-        return Objects.equals(id, estatesEntity.id) && Objects.equals(buyerName, estatesEntity.buyerName) && Objects.equals(propertyName, estatesEntity.propertyName) && sellingPrice == estatesEntity.sellingPrice && price == estatesEntity.price && Objects.equals(sharesNumber, estatesEntity.sharesNumber) && Objects.equals(sale_date, estatesEntity.sale_date) && Objects.equals(users_added_to_estates, estatesEntity.users_added_to_estates);
+        return Objects.equals(id, estatesEntity.id) && Objects.equals(buyerName, estatesEntity.buyerName) && Objects.equals(propertyName, estatesEntity.propertyName) && sellingPrice == estatesEntity.sellingPrice && price == estatesEntity.price && Objects.equals(sharesNumber, estatesEntity.sharesNumber) && Objects.equals(sale_date, estatesEntity.sale_date) && Objects.equals(list_Estate, estatesEntity.list_Estate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, buyerName, propertyName, sellingPrice, price, sharesNumber, sale_date, users_added_to_estates);
+        return Objects.hash(id, buyerName, propertyName, sellingPrice, price, sharesNumber, sale_date, list_Estate);
     }
 
     @Override
@@ -194,10 +192,11 @@ public class EstatesEntity {
             ", price='" + getPrice() + "'" +
             ", sharesNumber='" + getSharesNumber() + "'" +
             ", sale_date='" + getSale_date() + "'" +
-            ", users_added_to_estates='" + getUsers_added_to_estates() + "'" +
+            ", list_Estate='" + getList_Estate() + "'" +
             "}";
     }
 
+    
 
 
 }

@@ -5,51 +5,45 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 @Entity
-@Table(name  = "users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "users")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "id")
 
 public class UserEntity {
-    
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     private String userName;
 
-    private String password;        
+    private String password;
 
-
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "users_added_to_estates")
-         
-//    @ManyToMany  //(fetch = FetchType.LAZY, targetEntity = EstatesEntity.class)
-//    @JoinTable(
-//    name = "estates_user", 
-//    joinColumns = @JoinColumn(name = "user_id"), 
-//    inverseJoinColumns = @JoinColumn(name = "estate_id"))
-    //@ManyToMany
-    private List<EstatesEntity> estates;
-
+    @ManyToMany(mappedBy = "list_Estate")
+    private Collection<EstatesEntity> estates = new ArrayList<>();
 
     public UserEntity() {
     }
 
-    public UserEntity(Integer id, String userName, String password, List<EstatesEntity> estates) {
+    public UserEntity(Integer id, String userName, String password, Collection<EstatesEntity> estates) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -80,11 +74,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public List<EstatesEntity> getEstates() {
+    public Collection<EstatesEntity> getEstates() {
         return this.estates;
     }
 
-    public void setEstates(List<EstatesEntity> estates) {
+    public void setEstates(Collection<EstatesEntity> estates) {
         this.estates = estates;
     }
 
@@ -103,7 +97,7 @@ public class UserEntity {
         return this;
     }
 
-    public UserEntity estates(List<EstatesEntity> estates) {
+    public UserEntity estates(Collection<EstatesEntity> estates) {
         setEstates(estates);
         return this;
     }
@@ -133,6 +127,6 @@ public class UserEntity {
             ", estates='" + getEstates() + "'" +
             "}";
     }
-    
+
 
 }
