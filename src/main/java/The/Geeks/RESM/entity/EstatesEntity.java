@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 import The.Geeks.RESM.dto.EstatesDto;
@@ -39,6 +40,8 @@ public class EstatesEntity {
     private double sellingPrice;
     private double price;
     private Integer sharesNumber;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sale_date;
 
     @ManyToMany(targetEntity = UserEntity.class)

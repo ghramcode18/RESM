@@ -27,13 +27,13 @@ public class EstatesController {
     @Autowired
     EstatesServicesImp estateServiceImp;
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public Object viewHomePage(EstatesDto estatesDto, Model model) {
-        List<EstatesDto> list = estateServiceImp.getAllEstate();
-        model.addAttribute("list", list);
-         return "index";
+    // @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    // public Object viewHomePage(EstatesDto estatesDto, Model model) {
+    //     List<EstatesDto> list = estateServiceImp.getAllEstate();
+    //     model.addAttribute("list", list);
+    //      return "index";
 
-    }
+    // }
 
     // @GetMapping("/")    
     // public String home( Model model) {
@@ -42,16 +42,16 @@ public class EstatesController {
     //     return "index";
     // }
 
-    @GetMapping("/add")
-    public String showAddForm(EstatesDto EstatesDto, Model model) {
-        return "add-shop";
-    }
+    // @GetMapping("/add")
+    // public String showAddForm(EstatesDto EstatesDto, Model model) {
+    //     return "add-shop";
+    // }
 
-    @PostMapping("/save")
-    public String create(EstatesDto estatesDto, Model model) {
-        estateServiceImp.updateEstate(estatesDto);
-        return "redirect:/";
-    }
+    // @PostMapping("/save")
+    // public String create(EstatesDto estatesDto, Model model) {
+    //     estateServiceImp.updateEstate(estatesDto);
+    //     return "redirect:/";
+    // }
 
     // @RequestMapping(path = { "/update", "/update/{id}" })
     // public String update(Model model, @PathVariable("id") Integer id) {
@@ -64,11 +64,11 @@ public class EstatesController {
     // return "add-shop";
     // }
 
-    @RequestMapping(path = { "/delete/{id}" })
-    public String delete(Model model, @PathVariable("id") Integer id) {
-        estateServiceImp.deleteEstate(id);
-        return "redirect:/";
-    }
+    // @RequestMapping(path = { "/delete/{id}" })
+    // public String delete(Model model, @PathVariable("id") Integer id) {
+    //     estateServiceImp.deleteEstate(id);
+    //     return "redirect:/";
+    // }
     ////////////////////////////////////////////////////////////////////////////////////////////////
    	// display list of EstatesEntity
 	@GetMapping("/")
@@ -106,7 +106,7 @@ public class EstatesController {
 		return "new_estatesEntity";
 	}
     @PostMapping("/saveEstatesEntity")
-	public String saveEstates(@ModelAttribute("estatesEntity") EstatesEntity estatesEntity) {
+	public String saveEstatesEntity(@ModelAttribute("estatesEntity") EstatesEntity estatesEntity) {
 		// save estatesEntity to database
 		estateServiceImp.save(estatesEntity);
 		return "redirect:/";
@@ -128,10 +128,10 @@ public class EstatesController {
     @GetMapping("/deleteEstatesEntity/{id}")
 	public String deleteEstatesEntity(@PathVariable (value = "id") Integer id) {
 		
-		// call delete estatesEntity method 
+		// call delete employee method 
 		this.estateServiceImp.deleteEstatesEntityById(id);
 		return "redirect:/";
-
+        
 	}
 	
 }
