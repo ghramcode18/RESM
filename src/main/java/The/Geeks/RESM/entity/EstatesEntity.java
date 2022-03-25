@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,18 +14,13 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.Nullable;
-
-import The.Geeks.RESM.dto.EstatesDto;
 
 @Entity
 @Table(name = "estates")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class EstatesEntity {
 
@@ -40,21 +33,19 @@ public class EstatesEntity {
     private double sellingPrice;
     private double price;
     private Integer sharesNumber;
-    
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sale_date;
 
     @ManyToMany(targetEntity = UserEntity.class)
-    @JoinTable(
-    name = "users_estates", 
-    joinColumns = @JoinColumn(name = "estates_id"), 
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "users_estates", joinColumns = @JoinColumn(name = "estates_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<UserEntity> list_Estate;
 
     public EstatesEntity() {
     }
 
-    public EstatesEntity(Integer id, String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date, List<UserEntity> list_Estate) {
+    public EstatesEntity(Integer id, String buyerName, String propertyName, double sellingPrice, double price,
+            Integer sharesNumber, Date sale_date, List<UserEntity> list_Estate) {
         this.id = id;
         this.buyerName = buyerName;
         this.propertyName = propertyName;
@@ -177,7 +168,12 @@ public class EstatesEntity {
             return false;
         }
         EstatesEntity estatesEntity = (EstatesEntity) o;
-        return Objects.equals(id, estatesEntity.id) && Objects.equals(buyerName, estatesEntity.buyerName) && Objects.equals(propertyName, estatesEntity.propertyName) && sellingPrice == estatesEntity.sellingPrice && price == estatesEntity.price && Objects.equals(sharesNumber, estatesEntity.sharesNumber) && Objects.equals(sale_date, estatesEntity.sale_date) && Objects.equals(list_Estate, estatesEntity.list_Estate);
+        return Objects.equals(id, estatesEntity.id) && Objects.equals(buyerName, estatesEntity.buyerName)
+                && Objects.equals(propertyName, estatesEntity.propertyName)
+                && sellingPrice == estatesEntity.sellingPrice && price == estatesEntity.price
+                && Objects.equals(sharesNumber, estatesEntity.sharesNumber)
+                && Objects.equals(sale_date, estatesEntity.sale_date)
+                && Objects.equals(list_Estate, estatesEntity.list_Estate);
     }
 
     @Override
@@ -188,18 +184,15 @@ public class EstatesEntity {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", buyerName='" + getBuyerName() + "'" +
-            ", propertyName='" + getPropertyName() + "'" +
-            ", sellingPrice='" + getSellingPrice() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", sharesNumber='" + getSharesNumber() + "'" +
-            ", sale_date='" + getSale_date() + "'" +
-            ", list_Estate='" + getList_Estate() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", buyerName='" + getBuyerName() + "'" +
+                ", propertyName='" + getPropertyName() + "'" +
+                ", sellingPrice='" + getSellingPrice() + "'" +
+                ", price='" + getPrice() + "'" +
+                ", sharesNumber='" + getSharesNumber() + "'" +
+                ", sale_date='" + getSale_date() + "'" +
+                ", list_Estate='" + getList_Estate() + "'" +
+                "}";
     }
-
-    
-
 
 }

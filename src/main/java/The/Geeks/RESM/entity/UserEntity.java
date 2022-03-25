@@ -1,31 +1,18 @@
 package The.Geeks.RESM.entity;
 
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Table;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-// property = "id")
 
 public class UserEntity {
 
@@ -110,7 +97,8 @@ public class UserEntity {
             return false;
         }
         UserEntity userEntity = (UserEntity) o;
-        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName) && Objects.equals(password, userEntity.password) && Objects.equals(estates, userEntity.estates);
+        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName)
+                && Objects.equals(password, userEntity.password) && Objects.equals(estates, userEntity.estates);
     }
 
     @Override
@@ -121,12 +109,11 @@ public class UserEntity {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", estates='" + getEstates() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", userName='" + getUserName() + "'" +
+                ", password='" + getPassword() + "'" +
+                ", estates='" + getEstates() + "'" +
+                "}";
     }
-
 
 }

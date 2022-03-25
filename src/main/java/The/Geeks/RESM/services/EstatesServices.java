@@ -25,9 +25,9 @@ public interface EstatesServices {
 
     Page<EstatesEntity> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
-
     EstatesEntity getEstatesEntityById(Integer id);
 
     public void save(EstatesEntity estateEntity);
-    public void deleteEstatesEntityById(Integer id  );
+
+    public void deleteEstatesEntityById(Integer id);
 }

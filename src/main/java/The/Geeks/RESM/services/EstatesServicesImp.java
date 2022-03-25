@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-
 import The.Geeks.RESM.dto.EstatesDto;
 import The.Geeks.RESM.dto.UserDto;
 import The.Geeks.RESM.entity.EstatesEntity;
@@ -20,7 +19,6 @@ import The.Geeks.RESM.exception.EstatesException;
 import The.Geeks.RESM.exception.UserException;
 import The.Geeks.RESM.repositories.EstatesRepo;
 import The.Geeks.RESM.repositories.UserRepo;
-
 
 @Service
 public class EstatesServicesImp implements EstatesServices {
@@ -50,25 +48,26 @@ public class EstatesServicesImp implements EstatesServices {
     }
 
     @Override
-	public void save(EstatesEntity estateEntity) {
-		this.estatesRepo.save(estateEntity);
-	}
+    public void save(EstatesEntity estateEntity) {
+        this.estatesRepo.save(estateEntity);
+    }
 
     @Override
-	public EstatesEntity getEstatesEntityById(Integer id) {
-		Optional<EstatesEntity> optional = estatesRepo.findById(id);
-		EstatesEntity estateEntity = null;
-		if (optional.isPresent()) {
-			estateEntity = optional.get();
-		} else {
-			throw new RuntimeException(" EstatesEntity not found for id :: " + id);
-		}
-		return estateEntity;
-	}
+    public EstatesEntity getEstatesEntityById(Integer id) {
+        Optional<EstatesEntity> optional = estatesRepo.findById(id);
+        EstatesEntity estateEntity = null;
+        if (optional.isPresent()) {
+            estateEntity = optional.get();
+        } else {
+            throw new RuntimeException(" EstatesEntity not found for id :: " + id);
+        }
+        return estateEntity;
+    }
+
     @Override
-	public void deleteEstatesEntityById(Integer id) {
-		this.estatesRepo.deleteById(id);
-	}
+    public void deleteEstatesEntityById(Integer id) {
+        this.estatesRepo.deleteById(id);
+    }
 
     @Override
     public void deleteEstate(Integer estateID) {
@@ -135,7 +134,6 @@ public class EstatesServicesImp implements EstatesServices {
                 .price(estateDto.getPrice())
                 .sharesNumber(estateDto.getSharesNumber())
                 .sale_date(estateDto.getSale_date());
-        
 
         return estatesEntity;
     }
@@ -146,19 +144,20 @@ public class EstatesServicesImp implements EstatesServices {
         return ListEstatesEntityToEstatesDto(estatesEntity);
 
     }
-    public List<EstatesEntity> getAllShops(){
-        List<EstatesEntity> list =  estatesRepo.findAll();
-        return  list;
+
+    public List<EstatesEntity> getAllShops() {
+        List<EstatesEntity> list = estatesRepo.findAll();
+        return list;
     }
-    
-	@Override
-	public Page<EstatesEntity> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
-		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-			Sort.by(sortField).descending();
-		
-		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-		return this.estatesRepo.findAll(pageable);
-	}
+
+    @Override
+    public Page<EstatesEntity> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.estatesRepo.findAll(pageable);
+    }
 
     private List<EstatesDto> ListEstatesEntityToEstatesDto(List<EstatesEntity> estatesEntities) {
         List<EstatesDto> estatesDto = new ArrayList<>();
