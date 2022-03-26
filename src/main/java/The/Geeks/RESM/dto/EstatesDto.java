@@ -1,9 +1,10 @@
 package The.Geeks.RESM.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class EstatesDto {
+public class EstatesDto implements Serializable {
     private Integer id;
     private String buyerName;
     private String propertyName;
