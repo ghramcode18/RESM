@@ -27,6 +27,7 @@ public class ResmApplication implements CommandLineRunner {
 		estatesDto.setPropertyName("home3");
 		estatesDto.setSellingPrice(1000);
 		estatesDto.setPrice(900);
+		estatesDto.setSharesNumber(2);
 
 		System.out.println("Sending message...");
 		rabbitTemplate.convertAndSend(RabbitMQConfiguration.topicExchangeName,
