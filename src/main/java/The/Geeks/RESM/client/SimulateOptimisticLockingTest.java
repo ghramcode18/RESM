@@ -10,14 +10,14 @@ import The.Geeks.RESM.util.HibernateUtil;
 public class SimulateOptimisticLockingTest {
  
 	public static void main(String[] args) {
-		Integer estatesEntityID = 1;
+		Integer estatesId = 1;
 		Thread t1 = new Thread(new Runnable() {
 			Session session1 = HibernateUtil.getSessionFactory().openSession();
 			Transaction tx = null;
 
 			@Override
 			public void run() {
-				EstatesEntity estatesEntity = session1.get(EstatesEntity.class, estatesEntityID);
+				EstatesEntity estatesEntity = session1.get(EstatesEntity.class, estatesId);
 				if (estatesEntity != null) {
 					tx = session1.beginTransaction();
 
@@ -39,7 +39,7 @@ public class SimulateOptimisticLockingTest {
 
 			@Override
 			public void run() {
-				EstatesEntity estatesEntity = session2.get(EstatesEntity.class, estatesEntityID);
+				EstatesEntity estatesEntity = session2.get(EstatesEntity.class, estatesId);
 				if (estatesEntity != null) {
 					tx = session2.beginTransaction();
 					estatesEntity.setBuyerName("ali@gmail");
