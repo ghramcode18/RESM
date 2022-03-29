@@ -21,9 +21,10 @@ public class OptimisticLockingTest {
 			if(estatesEntity != null){
 				
 				tx = session.beginTransaction();
-				estatesEntity.setBuyerName("ali@gmail");
+				estatesEntity.setBuyerName("aliosh@gmail");
 				session.update(estatesEntity);
 				tx.commit();
+				
 			}else{
 				System.out.println("estatesEntity details not found with ID: "+estatesId);
 			}
