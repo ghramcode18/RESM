@@ -11,7 +11,7 @@
 
 
 	<groupId>The.Geeks</groupId>
-	<artifactId>RESM</artifactId>s
+	<artifactId>RESM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RESM</name>
 	<description>Real estate management application to make dealing with real estate available (at hand), and to make you more interactive with real estate.</description>
