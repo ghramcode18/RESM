@@ -15,22 +15,22 @@ public class EstatesDto {
     public EstatesDto() {
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public EstatesDto(Integer id, String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date) {
         this.id = id;
-    }
-
-    public EstatesDto(String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber,
-            Date sale_date) {
         this.buyerName = buyerName;
         this.propertyName = propertyName;
         this.sellingPrice = sellingPrice;
         this.price = price;
         this.sharesNumber = sharesNumber;
         this.sale_date = sale_date;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getBuyerName() {
@@ -81,6 +81,11 @@ public class EstatesDto {
         this.sale_date = sale_date;
     }
 
+    public EstatesDto id(Integer id) {
+        setId(id);
+        return this;
+    }
+
     public EstatesDto buyerName(String buyerName) {
         setBuyerName(buyerName);
         return this;
@@ -119,27 +124,25 @@ public class EstatesDto {
             return false;
         }
         EstatesDto estatesDto = (EstatesDto) o;
-        return Objects.equals(buyerName, estatesDto.buyerName) && Objects.equals(propertyName, estatesDto.propertyName)
-                && sellingPrice == estatesDto.sellingPrice && price == estatesDto.price
-                && Objects.equals(sharesNumber, estatesDto.sharesNumber)
-                && Objects.equals(sale_date, estatesDto.sale_date);
+        return Objects.equals(id, estatesDto.id) && Objects.equals(buyerName, estatesDto.buyerName) && Objects.equals(propertyName, estatesDto.propertyName) && sellingPrice == estatesDto.sellingPrice && price == estatesDto.price && Objects.equals(sharesNumber, estatesDto.sharesNumber) && Objects.equals(sale_date, estatesDto.sale_date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buyerName, propertyName, sellingPrice, price, sharesNumber, sale_date);
+        return Objects.hash(id, buyerName, propertyName, sellingPrice, price, sharesNumber, sale_date);
     }
 
     @Override
     public String toString() {
         return "{" +
-                " buyerName='" + getBuyerName() + "'" +
-                ", propertyName='" + getPropertyName() + "'" +
-                ", sellingPrice='" + getSellingPrice() + "'" +
-                ", price='" + getPrice() + "'" +
-                ", sharesNumber='" + getSharesNumber() + "'" +
-                ", sale_date='" + getSale_date() + "'" +
-                "}";
+            " id='" + getId() + "'" +
+            ", buyerName='" + getBuyerName() + "'" +
+            ", propertyName='" + getPropertyName() + "'" +
+            ", sellingPrice='" + getSellingPrice() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", sharesNumber='" + getSharesNumber() + "'" +
+            ", sale_date='" + getSale_date() + "'" +
+            "}";
     }
 
 }
