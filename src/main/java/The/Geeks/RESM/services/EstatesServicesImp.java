@@ -121,7 +121,9 @@ public class EstatesServicesImp implements EstatesServices {
                 .sellingPrice(estatesEntity.getSellingPrice())
                 .price(estatesEntity.getPrice())
                 .sharesNumber(estatesEntity.getSharesNumber())
-                .sale_date(estatesEntity.getSale_date());
+                .sale_date(estatesEntity.getSale_date())
+                .id(estateDto.getId());
+                ;
 
         return estateDto;
     }
@@ -133,7 +135,9 @@ public class EstatesServicesImp implements EstatesServices {
                 .sellingPrice(estateDto.getSellingPrice())
                 .price(estateDto.getPrice())
                 .sharesNumber(estateDto.getSharesNumber())
-                .sale_date(estateDto.getSale_date());
+                .sale_date(estateDto.getSale_date())
+                .id(estateDto.getId());
+                ;
 
         return estatesEntity;
     }
