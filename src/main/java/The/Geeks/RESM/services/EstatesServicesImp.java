@@ -164,8 +164,7 @@ public class EstatesServicesImp implements EstatesServices {
         if (estatesEntities.size() > 0) {
             for (EstatesEntity estateEntity : estatesEntities) {
                 EstatesDto estateDto = new EstatesDto();
-                estateDto.
-                buyerName(estateEntity.getBuyerName())
+                estateDto.buyerName(estateEntity.getBuyerName())
                         .propertyName(estateEntity.getPropertyName())
                         .sellingPrice(estateEntity.getSellingPrice())
                         .price(estateEntity.getPrice())

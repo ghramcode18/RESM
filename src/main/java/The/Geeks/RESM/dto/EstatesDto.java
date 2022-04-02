@@ -15,7 +15,8 @@ public class EstatesDto {
     public EstatesDto() {
     }
 
-    public EstatesDto(Integer id, String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date) {
+    public EstatesDto(Integer id, String buyerName, String propertyName, double sellingPrice, double price,
+            Integer sharesNumber, Date sale_date) {
         this.id = id;
         this.buyerName = buyerName;
         this.propertyName = propertyName;
@@ -124,7 +125,10 @@ public class EstatesDto {
             return false;
         }
         EstatesDto estatesDto = (EstatesDto) o;
-        return Objects.equals(id, estatesDto.id) && Objects.equals(buyerName, estatesDto.buyerName) && Objects.equals(propertyName, estatesDto.propertyName) && sellingPrice == estatesDto.sellingPrice && price == estatesDto.price && Objects.equals(sharesNumber, estatesDto.sharesNumber) && Objects.equals(sale_date, estatesDto.sale_date);
+        return Objects.equals(id, estatesDto.id) && Objects.equals(buyerName, estatesDto.buyerName)
+                && Objects.equals(propertyName, estatesDto.propertyName) && sellingPrice == estatesDto.sellingPrice
+                && price == estatesDto.price && Objects.equals(sharesNumber, estatesDto.sharesNumber)
+                && Objects.equals(sale_date, estatesDto.sale_date);
     }
 
     @Override
@@ -135,14 +139,14 @@ public class EstatesDto {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", buyerName='" + getBuyerName() + "'" +
-            ", propertyName='" + getPropertyName() + "'" +
-            ", sellingPrice='" + getSellingPrice() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", sharesNumber='" + getSharesNumber() + "'" +
-            ", sale_date='" + getSale_date() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", buyerName='" + getBuyerName() + "'" +
+                ", propertyName='" + getPropertyName() + "'" +
+                ", sellingPrice='" + getSellingPrice() + "'" +
+                ", price='" + getPrice() + "'" +
+                ", sharesNumber='" + getSharesNumber() + "'" +
+                ", sale_date='" + getSale_date() + "'" +
+                "}";
     }
 
 }
