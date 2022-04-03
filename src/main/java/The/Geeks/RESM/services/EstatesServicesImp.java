@@ -29,8 +29,8 @@ public class EstatesServicesImp implements EstatesServices {
     UserRepo userRepo;
 
     @Override
-    public void setEstateToUser(Integer userId, Integer estateId) {
-
+    public Object setEstateToUser(Integer userId, Integer estateId) {
+    //TODO ID RETURN NULL please fix me 
         EstatesEntity estateEntity;
         estateEntity = estatesRepo.findById(estateId)
                 .orElseThrow(() -> new EstatesException("no estate with this id"));
@@ -44,6 +44,7 @@ public class EstatesServicesImp implements EstatesServices {
             userEntities.add(userEntity);
         estateEntity.setList_Estate(userEntities);
         estatesRepo.save(estateEntity);
+        return estatesEntityToestatesDto(estateEntity);
 
     }
 

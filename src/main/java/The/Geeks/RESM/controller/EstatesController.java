@@ -29,8 +29,9 @@ public class EstatesController {
     }
 
     @PostMapping("/setEstate")
-    public void saveNewEstates(@RequestBody UserEstateModel userEstateModel) {
-        estateServiceImp.setEstateToUser(userEstateModel.getUserId(), userEstateModel.getEstateId());
+    public Object saveNewEstates(@RequestBody UserEstateModel userEstateModel) {
+        return  estateServiceImp.setEstateToUser(userEstateModel.getUserId(), userEstateModel.getEstateId());
+       
     }
 
     @GetMapping("/getEstatesEntityById/{id}")
