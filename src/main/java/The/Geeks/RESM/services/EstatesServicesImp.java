@@ -29,10 +29,10 @@ public class EstatesServicesImp implements EstatesServices {
     UserRepo userRepo;
 
     @Override
-    public void setEstate(Integer userId, EstatesDto estatesDto) {
+    public void setEstateToUser(Integer userId, Integer estateId) {
 
         EstatesEntity estateEntity;
-        estateEntity = estatesRepo.findById(estatesDto.getId())
+        estateEntity = estatesRepo.findById(estateId)
                 .orElseThrow(() -> new EstatesException("no estate with this id"));
         UserEntity userEntity;
         userEntity = userRepo.findById(userId).orElseThrow(() -> new UserException("no user with this id"));

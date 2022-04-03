@@ -11,7 +11,7 @@ import The.Geeks.RESM.entity.EstatesEntity;
 
 @Service
 public interface EstatesServices {
-    public void setEstate(Integer userId, EstatesDto estatesDto);
+    public void setEstateToUser(Integer userId, Integer estateId) ;
 
     public void deleteEstate(Integer estateID);
 

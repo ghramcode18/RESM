@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import The.Geeks.RESM.dto.EstatesDto;
+import The.Geeks.RESM.dto.UserEstateModel;
 import The.Geeks.RESM.entity.EstatesEntity;
 import The.Geeks.RESM.services.EstatesServicesImp;
 
@@ -27,9 +28,9 @@ public class EstatesController {
         return estateServiceImp.getAllEstate();
     }
 
-    @PostMapping("/setEstate/{Id}")
-    public void saveNewEstates(@PathVariable(name = "Id")  Integer Id, @RequestBody EstatesDto estatesDto) {
-        estateServiceImp.setEstate(Id, estatesDto);
+    @PostMapping("/setEstate")
+    public void saveNewEstates(@RequestBody UserEstateModel userEstateModel) {
+        estateServiceImp.setEstateToUser(userEstateModel.getUserId(), userEstateModel.getEstateId());
     }
 
     @GetMapping("/getEstatesEntityById/{id}")
