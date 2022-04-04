@@ -26,6 +26,9 @@ public class EstatesDto {
         this.sale_date = sale_date;
     }
 
+    public EstatesDto(String string, String string2, String string3) {
+    }
+
     public Integer getId() {
         return this.id;
     }

@@ -23,43 +23,39 @@ import The.Geeks.RESM.repositories.EstatesRepo;
 import The.Geeks.RESM.repositories.UserRepo;
 
 
-import org.apache.logging.log4j.Logger;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.aspectj.lang.annotation.Aspect;
-// import org.apache.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Aspect
 @Component
-
 @Service
 
 public class EstatesServicesImp implements EstatesServices {
      
-//    static Logger logger = Logger.getLogger(EstatesServicesImp.class);
+   // static Logger logger = Logger.getLogger(EstatesServicesImp.class);
+    // private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-//     @Pointcut("execution(*com.mighyjava.*.*.*(..))")
-//     private void generalPointcut(){
+    // @Pointcut("execution(*com.mighyjava.*.*.*(..))")
+    // private void generalPointcut(){
 
-//     }
-//     @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
-//     public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
-//     logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
+    // }
+    // @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
+    // public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
+    // logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
 
-//     } 
+    // } 
 
-//     @Before ("generalPointcut()")
-//     public void infoLog(JoinPoint joinPoint){
-//      logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
-//     }
+    // @Before ("generalPointcut()")
+    // public void infoLog(JoinPoint joinPoint){
+    //  logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
+    // }
     
 
     @Autowired
