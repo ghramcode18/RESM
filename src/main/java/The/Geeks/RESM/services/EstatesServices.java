@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import The.Geeks.RESM.dto.EstatesDto;
 import The.Geeks.RESM.dto.UserDto;
 import The.Geeks.RESM.entity.EstatesEntity;
+import org.apache.logging.log4j.Logger;
 
 @Service
 public interface EstatesServices {
+
     public Object setEstateToUser(Integer userId, Integer estateId) ;
 
     public void deleteEstate(Integer estateID);

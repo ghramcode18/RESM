@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +22,28 @@ import The.Geeks.RESM.exception.UserException;
 import The.Geeks.RESM.repositories.EstatesRepo;
 import The.Geeks.RESM.repositories.UserRepo;
 
+
+import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+
+@Aspect
+@Component
 @Service
+
 public class EstatesServicesImp implements EstatesServices {
+      /**
+     *
+     */
+    private static final Logger logger = Logger.getLogger(EstatesServicesImp.class);
+
+
     @Autowired
     EstatesRepo estatesRepo;
 
@@ -192,6 +214,21 @@ public class EstatesServicesImp implements EstatesServices {
         EstatesEntity entity = estatesRepo.findByPropertyName(propertyName);
 
         return estatesEntityToestatesDto(entity);
+    }
+    
+    @Pointcut("execution(*com.mighyjava.*.*.*(..))")
+    private void generalPointcut(){
+
+    }
+    @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
+    public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
+    logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
+
+    } 
+
+    @Before ("generalPointcut()")
+    public void infoLog(JoinPoint joinPoint){
+     logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
     }
 
 }
