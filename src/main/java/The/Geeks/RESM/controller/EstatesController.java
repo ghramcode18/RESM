@@ -54,4 +54,5 @@ public class EstatesController {
         estateServiceImp.deleteEstatesEntityById(id);
     }
 
+
 }

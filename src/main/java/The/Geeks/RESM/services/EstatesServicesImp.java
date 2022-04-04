@@ -30,19 +30,37 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.stereotype.Component;
-
+import org.aspectj.lang.annotation.Aspect;
+// import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 @Aspect
 @Component
+
 @Service
 
 public class EstatesServicesImp implements EstatesServices {
-      /**
-     *
-     */
-    private static final Logger logger = Logger.getLogger(EstatesServicesImp.class);
+     
+//    static Logger logger = Logger.getLogger(EstatesServicesImp.class);
 
+
+//     @Pointcut("execution(*com.mighyjava.*.*.*(..))")
+//     private void generalPointcut(){
+
+//     }
+//     @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
+//     public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
+//     logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
+
+//     } 
+
+//     @Before ("generalPointcut()")
+//     public void infoLog(JoinPoint joinPoint){
+//      logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
+//     }
+    
 
     @Autowired
     EstatesRepo estatesRepo;
@@ -216,19 +234,5 @@ public class EstatesServicesImp implements EstatesServices {
         return estatesEntityToestatesDto(entity);
     }
     
-    @Pointcut("execution(*com.mighyjava.*.*.*(..))")
-    private void generalPointcut(){
-
-    }
-    @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
-    public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
-    logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
-
-    } 
-
-    @Before ("generalPointcut()")
-    public void infoLog(JoinPoint joinPoint){
-     logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
-    }
 
 }

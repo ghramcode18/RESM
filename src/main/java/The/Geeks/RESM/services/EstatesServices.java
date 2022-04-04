@@ -9,8 +9,11 @@ import The.Geeks.RESM.dto.EstatesDto;
 import The.Geeks.RESM.dto.UserDto;
 import The.Geeks.RESM.entity.EstatesEntity;
 import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.annotation.Aspect;
 
 @Service
+@Aspect
+
 public interface EstatesServices {
 
     public Object setEstateToUser(Integer userId, Integer estateId) ;
