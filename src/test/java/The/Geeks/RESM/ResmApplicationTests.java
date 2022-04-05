@@ -1,13 +1,27 @@
-package The.Geeks.RESM;
+// package The.Geeks.RESM;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import java.util.List;
 
-@SpringBootTest
-class ResmApplicationTests {
+// import org.junit.jupiter.api.Test;
+// import org.junit.runner.RunWith;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.context.SpringBootTest;
+// import org.springframework.test.context.junit4.SpringRunner;
 
-	@Test
-	void contextLoads() {
-	}
+// import The.Geeks.RESM.dto.EstatesDto;
+// import The.Geeks.RESM.services.EstatesServices;
 
-}
+// @RunWith(SpringRunner.class)
+// @SpringBootTest
+
+// class ResmApplicationTests {
+
+// 	@Autowired
+//     EstatesServices estatesServices;
+
+// 	@Test
+//     public List<EstatesDto> getAllEstate() {
+// 		estatesServices.getAllEstate();
+// 	}
+
+// }

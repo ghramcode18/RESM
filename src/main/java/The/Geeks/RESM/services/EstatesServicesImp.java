@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import The.Geeks.RESM.dto.EstatesDto;
 import The.Geeks.RESM.dto.UserDto;
@@ -23,40 +21,20 @@ import The.Geeks.RESM.repositories.EstatesRepo;
 import The.Geeks.RESM.repositories.UserRepo;
 
 
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Service;
 
-@Aspect
-@Component
+import java.util.Random;
+
 @Service
+@Aspect
 
 public class EstatesServicesImp implements EstatesServices {
      
-   // static Logger logger = Logger.getLogger(EstatesServicesImp.class);
-    // private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LogManager.getLogger(EstatesServicesImp.class);
 
-
-    // @Pointcut("execution(*com.mighyjava.*.*.*(..))")
-    // private void generalPointcut(){
-
-    // }
-    // @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
-    // public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
-    // logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
-
-    // } 
-
-    // @Before ("generalPointcut()")
-    // public void infoLog(JoinPoint joinPoint){
-    //  logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
-    // }
-    
 
     @Autowired
     EstatesRepo estatesRepo;
@@ -181,9 +159,18 @@ public class EstatesServicesImp implements EstatesServices {
 
     @Override
     public List<EstatesDto> getAllEstate() {
-        List<EstatesEntity> estatesEntity = estatesRepo.findAll();
-        return ListEstatesEntityToEstatesDto(estatesEntity);
+        List<EstatesDto> estatesDto = new ArrayList<>();
+        try {
+            List<EstatesEntity> estatesEntity = estatesRepo.findAll();
+            estatesDto  =  ListEstatesEntityToEstatesDto(estatesEntity);
+            LOGGER.info(" no error occured, everything same be in order", estatesDto.size());
+            LOGGER.info(" no error occured, everything same be in order", estatesDto.get(1));
 
+        } catch (Exception exception) {
+            LOGGER.error("Error occurred in business service : {}",exception.getMessage());
+
+        }
+        return estatesDto;
     }
 
     public List<EstatesEntity> getAllShops() {
