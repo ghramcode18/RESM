@@ -24,39 +24,30 @@ import The.Geeks.RESM.repositories.UserRepo;
 
 
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
-import org.apache.logging.log4j.Logger;
-
 @Aspect
 @Component
 @Service
 
 public class EstatesServicesImp implements EstatesServices {
-     
-   // static Logger logger = Logger.getLogger(EstatesServicesImp.class);
-    // private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    // static Logger logger = Logger.getLogger(EstatesServicesImp.class);
+    // private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // @Pointcut("execution(*com.mighyjava.*.*.*(..))")
     // private void generalPointcut(){
 
     // }
-    // @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex ")  
+    // @AfterThrowing(pointcut="generalPointcut() throws Exception ", throwing ="ex
+    // ")
     // public void exceptionLog(JoinPoint joinPoint, Exception ex) throws Exception{
     // logger.error(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature()+":"+ex.getMessage());
 
-    // } 
+    // }
 
     // @Before ("generalPointcut()")
     // public void infoLog(JoinPoint joinPoint){
-    //  logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
+    // logger.info(joinPoint.getTarget().getClass().getSimpleName()+":"+joinPoint.getSignature());
     // }
-    
 
     @Autowired
     EstatesRepo estatesRepo;
@@ -66,7 +57,7 @@ public class EstatesServicesImp implements EstatesServices {
 
     @Override
     public Object setEstateToUser(Integer userId, Integer estateId) {
-    //TODO ID RETURN NULL please fix me 
+        // TODO ID RETURN NULL please fix me
         EstatesEntity estateEntity;
         estateEntity = estatesRepo.findById(estateId)
                 .orElseThrow(() -> new EstatesException("no estate with this id"));
@@ -160,7 +151,7 @@ public class EstatesServicesImp implements EstatesServices {
                 .sharesNumber(estatesEntity.getSharesNumber())
                 .sale_date(estatesEntity.getSale_date())
                 .id(estateDto.getId());
-                ;
+        ;
 
         return estateDto;
     }
@@ -174,7 +165,7 @@ public class EstatesServicesImp implements EstatesServices {
                 .sharesNumber(estateDto.getSharesNumber())
                 .sale_date(estateDto.getSale_date())
                 .id(estateDto.getId());
-                ;
+        ;
 
         return estatesEntity;
     }
@@ -222,6 +213,9 @@ public class EstatesServicesImp implements EstatesServices {
         }
 
     }
+    public EstatesEntity createEstate(EstatesEntity eEstatesEntity) {
+        return estatesRepo.save(eEstatesEntity);
+    }
 
     @Override
     public EstatesDto searchByName(String propertyName) {
@@ -229,6 +223,5 @@ public class EstatesServicesImp implements EstatesServices {
 
         return estatesEntityToestatesDto(entity);
     }
-    
 
 }

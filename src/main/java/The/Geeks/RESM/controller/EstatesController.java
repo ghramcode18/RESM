@@ -2,6 +2,7 @@ package The.Geeks.RESM.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class EstatesController {
         return estateServiceImp.getAllEstate();
     }
 
-    @PostMapping("/setEstate")
+    @PostMapping("/setEstateWithUser")
     public Object saveNewEstates(@RequestBody UserEstateModel userEstateModel) {
         return  estateServiceImp.setEstateToUser(userEstateModel.getUserId(), userEstateModel.getEstateId());
        
@@ -54,5 +55,9 @@ public class EstatesController {
         estateServiceImp.deleteEstatesEntityById(id);
     }
 
+    @PostMapping("/createEstate")
+    public EstatesEntity createEstate( @RequestBody EstatesEntity estatesEntity) {
+        return estateServiceImp.createEstate(estatesEntity);
+    }
 
 }

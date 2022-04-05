@@ -14,10 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import The.Geeks.RESM.dto.EstatesDto;
 
 public class SpringRestClient {
-//TODO : please fix my i have a problem 
+    // TODO : please fix my i have a problem
     private static final String GET_EMPLOYEES_ENDPOINT_URL = "http://localhost:8081/api/v1/getAllEstate";
     private static final String GET_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/getEstatesEntityById/{id}";
-    private static final String CREATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/setEstate";
+    private static final String CREATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/createEstate";
     private static final String UPDATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/updateEstate";
     private static final String DELETE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/delete/{id}";
     private static RestTemplate restTemplate = new RestTemplate();
@@ -25,23 +25,18 @@ public class SpringRestClient {
     public static void main(String[] args) {
         SpringRestClient springRestClient = new SpringRestClient();
 
-        // Step1: first create a new employee
-        springRestClient.createEmployee();
+        springRestClient.createEstate();
 
-        // Step 2: get new created employee from step1
-        springRestClient.getEmployeeById();
+        springRestClient.getEstatesEntityById();
 
-        // Step3: get all employees
-        springRestClient.getEmployees();
+        springRestClient.getAllEstate();
 
-        // Step4: Update employee with id = 1
-        springRestClient.updateEmployee();
+        springRestClient.updateEstate();
 
-        // Step5: Delete employee with id = 1
-        springRestClient.deleteEmployee();
+        springRestClient.deleteEstatesEntityById();
     }
 
-    private void getEmployees() {
+    private void getAllEstate() {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -53,7 +48,7 @@ public class SpringRestClient {
         System.out.println(result);
     }
 
-    private void getEmployeeById() {
+    private void getEstatesEntityById() {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("id", "1");
@@ -64,17 +59,17 @@ public class SpringRestClient {
         System.out.println(result);
     }
 
-    private void createEmployee() {
+    private void createEstate() {
 
-        EstatesDto newEmployee = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
+        EstatesDto newEstatesDto = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
 
         RestTemplate restTemplate = new RestTemplate();
-        EstatesDto result = restTemplate.postForObject(CREATE_EMPLOYEE_ENDPOINT_URL, newEmployee, EstatesDto.class);
+        EstatesDto result = restTemplate.postForObject(CREATE_EMPLOYEE_ENDPOINT_URL, newEstatesDto, EstatesDto.class);
 
         System.out.println(result);
     }
 
-    private void updateEmployee() {
+    private void updateEstate() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("id", "1");
         EstatesDto updatedEmployee = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
@@ -83,7 +78,7 @@ public class SpringRestClient {
         restTemplate.put(UPDATE_EMPLOYEE_ENDPOINT_URL, updatedEmployee, params);
     }
 
-    private void deleteEmployee() {
+    private void deleteEstatesEntityById() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("id", "1");
         RestTemplate restTemplate = new RestTemplate();

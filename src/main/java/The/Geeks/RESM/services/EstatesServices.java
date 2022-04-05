@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import The.Geeks.RESM.dto.EstatesDto;
 import The.Geeks.RESM.dto.UserDto;
 import The.Geeks.RESM.entity.EstatesEntity;
-import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.annotation.Aspect;
 
 @Service
@@ -16,7 +15,7 @@ import org.aspectj.lang.annotation.Aspect;
 
 public interface EstatesServices {
 
-    public Object setEstateToUser(Integer userId, Integer estateId) ;
+    public Object setEstateToUser(Integer userId, Integer estateId);
 
     public void deleteEstate(Integer estateID);
 
@@ -35,4 +34,7 @@ public interface EstatesServices {
     public void save(EstatesEntity estateEntity);
 
     public void deleteEstatesEntityById(Integer id);
+
+    public EstatesEntity createEstate(EstatesEntity estatesEntity) ;
+    
 }
