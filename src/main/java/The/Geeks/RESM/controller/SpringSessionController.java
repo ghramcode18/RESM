@@ -19,7 +19,7 @@ public class SpringSessionController {
     
     
 	@GetMapping("/")
-	public String process(Model model, HttpSession session) {
+	public String home(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
 		List<String> messages = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
 
@@ -34,14 +34,19 @@ public class SpringSessionController {
 	@PostMapping("/persistMessage")
 	public String persistMessage(@RequestParam("msg") String msg, HttpServletRequest request) {
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("MY_SESSION_MESSAGES", messages);
+		List<String> msgs = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+		if (msgs == null) {
+			msgs = new ArrayList<>();
+			request.getSession().setAttribute("MY_SESSION_MESSAGES", msgs);
 		}
-		messages.add(msg);
-		request.getSession().setAttribute("MY_SESSION_MESSAGES", messages);
+		msgs.add(msg);
+		request.getSession().setAttribute("MY_SESSION_MESSAGES", msgs);
 		return "redirect:/";
 	}
 
+	@PostMapping("/destroy")
+	public String destroySession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
+	}
 }
