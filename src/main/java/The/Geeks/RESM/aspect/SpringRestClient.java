@@ -16,24 +16,24 @@ import The.Geeks.RESM.dto.EstatesDto;
 public class SpringRestClient {
     // TODO : please fix my i have a problem
     private static final String GET_EMPLOYEES_ENDPOINT_URL = "http://localhost:8081/api/v1/getAllEstate";
-    private static final String GET_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/getEstatesEntityById/{id}";
-    private static final String CREATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/createEstate";
-    private static final String UPDATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/updateEstate";
-    private static final String DELETE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/delete/{id}";
+   // private static final String GET_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/getEstatesEntityById/{id}";
+    // private static final String CREATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/createEstate";
+   // private static final String UPDATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/updateEstate";
+  //  private static final String DELETE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8081/api/v1/delete/{id}";
     private static RestTemplate restTemplate = new RestTemplate();
 
     public static void main(String[] args) {
         SpringRestClient springRestClient = new SpringRestClient();
 
-        springRestClient.createEstate();
+        // springRestClient.createEstate();
 
-        springRestClient.getEstatesEntityById();
+        // springRestClient.getEstatesEntityById();
 
         springRestClient.getAllEstate();
 
-        springRestClient.updateEstate();
+        // springRestClient.updateEstate();
 
-        springRestClient.deleteEstatesEntityById();
+        // springRestClient.deleteEstatesEntityById();
     }
 
     private void getAllEstate() {
@@ -48,40 +48,40 @@ public class SpringRestClient {
         System.out.println(result);
     }
 
-    private void getEstatesEntityById() {
+    // private void getEstatesEntityById() {
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("id", "1");
+    //     Map<String, String> params = new HashMap<String, String>();
+    //     params.put("id", "1");
 
-        RestTemplate restTemplate = new RestTemplate();
-        EstatesDto result = restTemplate.getForObject(GET_EMPLOYEE_ENDPOINT_URL, EstatesDto.class, params);
+    //     RestTemplate restTemplate = new RestTemplate();
+    //     EstatesDto result = restTemplate.getForObject(GET_EMPLOYEE_ENDPOINT_URL, EstatesDto.class, params);
 
-        System.out.println(result);
-    }
+    //     System.out.println(result);
+    // }
 
-    private void createEstate() {
+    // // private void createEstate() {
 
-        EstatesDto newEstatesDto = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
+    // //     EstatesDto newEstatesDto = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
 
-        RestTemplate restTemplate = new RestTemplate();
-        EstatesDto result = restTemplate.postForObject(CREATE_EMPLOYEE_ENDPOINT_URL, newEstatesDto, EstatesDto.class);
+    // //     RestTemplate restTemplate = new RestTemplate();
+    // //     EstatesDto result = restTemplate.postForObject(CREATE_EMPLOYEE_ENDPOINT_URL, newEstatesDto, EstatesDto.class);
 
-        System.out.println(result);
-    }
+    // //     System.out.println(result);
+    // // }
 
-    private void updateEstate() {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("id", "1");
-        EstatesDto updatedEmployee = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
-        ;
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.put(UPDATE_EMPLOYEE_ENDPOINT_URL, updatedEmployee, params);
-    }
+    // private void updateEstate() {
+    //     Map<String, String> params = new HashMap<String, String>();
+    //     params.put("id", "1");
+    //     EstatesDto updatedEmployee = new EstatesDto(18, "buyerName", "propertyName", 1000, 100, 21, null);
+    //     ;
+    //     RestTemplate restTemplate = new RestTemplate();
+    //     restTemplate.put(UPDATE_EMPLOYEE_ENDPOINT_URL, updatedEmployee, params);
+    // }
 
-    private void deleteEstatesEntityById() {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("id", "1");
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(DELETE_EMPLOYEE_ENDPOINT_URL, params);
-    }
+    // private void deleteEstatesEntityById() {
+    //     Map<String, String> params = new HashMap<String, String>();
+    //     params.put("id", "1");
+    //     RestTemplate restTemplate = new RestTemplate();
+    //     restTemplate.delete(DELETE_EMPLOYEE_ENDPOINT_URL, params);
+    // }
 }
