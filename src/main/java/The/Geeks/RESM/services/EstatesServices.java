@@ -35,6 +35,6 @@ public interface EstatesServices {
 
     public void deleteEstatesEntityById(Integer id);
 
-    public EstatesEntity createEstate(EstatesEntity estatesEntity) ;
+    public EstatesEntity createEstate(EstatesEntity estatesEntity) ; 
     
 }
