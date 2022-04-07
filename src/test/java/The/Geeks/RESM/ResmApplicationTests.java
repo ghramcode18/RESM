@@ -1,13 +1,12 @@
-package The.Geeks.RESM;
+// package The.Geeks.RESM;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ResmApplicationTests {
+// @SpringBootTest
+// class ResmApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
