@@ -4,9 +4,11 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -26,7 +28,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import lombok.extern.slf4j.Slf4j;
 
-import static java.util.Arrays.stream;
+// import static java.util.Arrays.stream;
 @Slf4j
 public class CostomAuthorizationFilter extends OncePerRequestFilter {
     public static final String APPLICATION_JSON_VALUE="applicaion/json";
@@ -49,7 +51,9 @@ public class CostomAuthorizationFilter extends OncePerRequestFilter {
                     String username = decodedJWT.getSubject();
                     String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                    stream(roles).forEach(role -> {
+                    Stream<String> stream = Arrays.stream(roles);
+
+                    stream.forEach(role -> {
                         authorities.add(new SimpleGrantedAuthority(role));
 
                     });
