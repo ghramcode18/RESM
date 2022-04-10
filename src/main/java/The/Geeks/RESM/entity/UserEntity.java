@@ -20,7 +20,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -30,9 +30,9 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(Integer id, String userName, String password, Collection<EstatesEntity> estates) {
+    public UserEntity(Integer id, String username, String password, Collection<EstatesEntity> estates) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.estates = estates;
     }
@@ -45,12 +45,12 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getUserName() {
-        return this.userName;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -74,8 +74,8 @@ public class UserEntity {
         return this;
     }
 
-    public UserEntity userName(String userName) {
-        setUserName(userName);
+    public UserEntity username(String username) {
+        setUsername(username);
         return this;
     }
 
@@ -97,23 +97,22 @@ public class UserEntity {
             return false;
         }
         UserEntity userEntity = (UserEntity) o;
-        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName)
-                && Objects.equals(password, userEntity.password) && Objects.equals(estates, userEntity.estates);
+        return Objects.equals(id, userEntity.id) && Objects.equals(username, userEntity.username) && Objects.equals(password, userEntity.password) && Objects.equals(estates, userEntity.estates);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, password, estates);
+        return Objects.hash(id, username, password, estates);
     }
 
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
-                ", userName='" + getUserName() + "'" +
-                ", password='" + getPassword() + "'" +
-                ", estates='" + getEstates() + "'" +
-                "}";
+            " id='" + getId() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", estates='" + getEstates() + "'" +
+            "}";
     }
 
 }

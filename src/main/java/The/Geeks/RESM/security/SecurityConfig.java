@@ -34,8 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
     }
 
-    private final BCryptPasswordEncoder bcryptPasswordEncoder;
+     private final BCryptPasswordEncoder bcryptPasswordEncoder;
 
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bcryptPasswordEncoder);
