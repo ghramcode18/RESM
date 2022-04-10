@@ -20,9 +20,7 @@ import The.Geeks.RESM.entity.UserEntity;
 import The.Geeks.RESM.exception.EstatesException;
 import The.Geeks.RESM.exception.UserException;
 import The.Geeks.RESM.repositories.EstatesRepo;
-import The.Geeks.RESM.repositories.UserRepo;
-
-
+import The.Geeks.RESM.repositories.UserEntityRepo;
 
 @Aspect
 @Component
@@ -53,7 +51,7 @@ public class EstatesServicesImp implements EstatesServices {
     EstatesRepo estatesRepo;
 
     @Autowired
-    UserRepo userRepo;
+    UserEntityRepo userRepo;
 
     @Override
     public Object setEstateToUser(Integer userId, Integer estateId) {
@@ -65,6 +63,7 @@ public class EstatesServicesImp implements EstatesServices {
         userEntity = userRepo.findById(userId).orElseThrow(() -> new UserException("no user with this id"));
 
         List<UserEntity> userEntities = estateEntity.getList_Estate();
+
         int i = userEntities.stream().filter((user) -> user.getId().equals(userEntity.getId()))
                 .toList().size();
         if (i == 0)
@@ -126,7 +125,7 @@ public class EstatesServicesImp implements EstatesServices {
     private UserDto UserEntityToUserDto(UserEntity uentity) {
         UserDto userDto = new UserDto();
         userDto.password(uentity.getPassword())
-                .userName(uentity.getUserName())
+                .userName(uentity.getUsername())
                 .id(uentity.getId());
         return userDto;
     }
@@ -213,6 +212,7 @@ public class EstatesServicesImp implements EstatesServices {
         }
 
     }
+
     public EstatesEntity createEstate(EstatesEntity eEstatesEntity) {
         return estatesRepo.save(eEstatesEntity);
     }
