@@ -9,17 +9,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-<<<<<<< HEAD
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 
-=======
 import The.Geeks.RESM.domain.Role;
 import The.Geeks.RESM.domain.User;
 import The.Geeks.RESM.services.UserService;
->>>>>>> jwt-with-another-way
 @SpringBootApplication
 
 public class ResmApplication {
