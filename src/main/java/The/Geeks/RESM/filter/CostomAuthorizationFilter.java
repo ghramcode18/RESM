@@ -52,7 +52,6 @@ public class CostomAuthorizationFilter extends OncePerRequestFilter {
                     String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     Stream<String> stream = Arrays.stream(roles);
-
                     stream.forEach(role -> {
                         authorities.add(new SimpleGrantedAuthority(role));
 
