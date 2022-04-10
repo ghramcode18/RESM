@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>EstatesEntity Management System</title>
+
+<link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous">
+  
+</head>
+<body>
+
+  <div class="container my-2">
+  <h1>EstatesEntity List</h1>
+  
+  <a th:href = "@{/showNewEstatesEntityForm}" class="btn btn-primary btn-sm mb-3"> Add EstatesEntity </a>
+  
+    <table border="1" class = "table table-striped table-responsive-md">
+      <thead>
+        <tr>
+          <th>
+            <a th:href="@{'/page/' + ${currentPage} + '?sortField=buyerName&sortDir=' + ${reverseSortDir}}">
+              EstatesEntity buyerName </a>
+          </th>
+          <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=propertyName&sortDir=' + ${reverseSortDir}}">
+                        EstatesEntity propertyName </a>
+          </th>
+          <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=sellingPrice&sortDir=' + ${reverseSortDir}}">
+                        EstatesEntity sellingPrice</a>
+          </th>
+          <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">
+            EstatesEntity price</a>
+          </th>
+          <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=sharesNumber&sortDir=' + ${reverseSortDir}}">
+            EstatesEntity sharesNumber</a>
+          </th>
+          <th>
+          <a th:href="@{'/page/' + ${currentPage} + '?sortField=sale_date&sortDir=' + ${reverseSortDir}}">
+            EstatesEntity sale_date</a>
+          </th>
+          <th> Actions </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="estatesEntity : ${listEstatesEntity}">
+          <td th:text="${estatesEntity.buyerName}"></td>
+          <td th:text="${estatesEntity.propertyName}"></td>
+          <td th:text="${estatesEntity.sellingPrice}"></td>
+          <td th:text="${estatesEntity.price}"></td>
+          <td th:text="${estatesEntity.sharesNumber}"></td>
+          <td th:text="${estatesEntity.sale_date}"></td>
+
+
+          <td> <a th:href="@{/showFormForUpdate/{id}(id=${estatesEntity.id})}" class="btn btn-primary">Update</a>
+              <a th:href="@{/deleteEstatesEntity/{id}(id=${estatesEntity.id})}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div th:if = "${totalPages > 1}">
+      <div class = "row col-sm-10">
+        <div class = "col-sm-2">
+          Total Rows: [[${totalItems}]] 
+        </div>
+        <div class = "col-sm-1">
+          <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+          </span>
+        </div>
+        <div class = "col-sm-1">
+          <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+          <span th:unless="${currentPage < totalPages}">Next</span>
+        </div>
+        
+         <div class="col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+          <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

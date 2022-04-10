@@ -73,6 +73,24 @@ public class EstatesServicesImp implements EstatesServices {
         return estatesEntityToestatesDto(estateEntity);
 
     }
+    @Override
+    public void setEstate(Integer userId, EstatesDto estatesDto) {
+
+        EstatesEntity estateEntity;
+        estateEntity = estatesRepo.findById(estatesDto.getId())
+                .orElseThrow(() -> new EstatesException("no estate with this id"));
+        UserEntity userEntity;
+        userEntity = userRepo.findById(userId).orElseThrow(() -> new UserException("no user with this id"));
+
+        List<UserEntity> userEntities = estateEntity.getList_Estate();
+        int i = userEntities.stream().filter((user) -> user.getId().equals(userEntity.getId()))
+                .toList().size();
+        if (i == 0)
+            userEntities.add(userEntity);
+        estateEntity.setList_Estate(userEntities);
+        estatesRepo.save(estateEntity);
+
+    }
 
     @Override
     public void save(EstatesEntity estateEntity) {
