@@ -59,7 +59,6 @@ public class ResmApplication {
 		return new BCryptPasswordEncoder();
 
 	}
-	////////////////////////////////////////////////////////////////
 	
 
 }

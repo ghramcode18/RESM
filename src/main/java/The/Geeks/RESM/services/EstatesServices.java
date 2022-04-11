@@ -37,7 +37,6 @@ public interface EstatesServices {
 
     public EstatesEntity createEstate(EstatesEntity estatesEntity) ;
     
-    /////////////////////////////////////////////////////////////
     public void setEstate(Integer userId, EstatesDto estatesDto);
 
 
