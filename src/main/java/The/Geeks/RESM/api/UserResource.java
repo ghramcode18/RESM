@@ -73,7 +73,7 @@ public class UserResource {
     }
 
     
-    @GetMapping("/api/token/refresh")
+    @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
 
