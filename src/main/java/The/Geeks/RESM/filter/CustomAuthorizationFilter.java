@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
+    import java.util.stream.Stream;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,18 +25,24 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-import static org.springframework.http.HttpStatus.FORBIDDEN;
+
 import lombok.extern.slf4j.Slf4j;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+
+import lombok.AllArgsConstructor;
 
 // import static java.util.Arrays.stream;
 @Slf4j
-public class CostomAuthorizationFilter extends OncePerRequestFilter {
+
+@AllArgsConstructor
+
+public class CustomAuthorizationFilter extends OncePerRequestFilter {
     public static final String APPLICATION_JSON_VALUE="applicaion/json";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        if (request.getServletPath().equals("/api/login")||request.getServletPath().equals("/api/token/refresh")||request.getServletPath().equals("/api/v1")) {
+        if (request.getServletPath().equals("/api/login")||request.getServletPath().equals("/api/token/refresh") ||request.getServletPath().equals("/api/users")) {
             filterChain.doFilter(request, response);
 
         } else {
@@ -62,7 +68,7 @@ public class CostomAuthorizationFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request,response)
                     ;
                 } catch (Exception exception) {
-                    logger.error(exception.getMessage(), exception);
+                    log.error("Error logging in:{}",exception.getMessage());
                     response.setHeader("error", exception.getMessage());
                    // response.sendError(FORBIDDEN.value());
                    response.setStatus(FORBIDDEN.value());
@@ -85,3 +91,4 @@ public class CostomAuthorizationFilter extends OncePerRequestFilter {
     }
 
 }
+ 

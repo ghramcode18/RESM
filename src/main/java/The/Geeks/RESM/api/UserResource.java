@@ -33,22 +33,21 @@ import The.Geeks.RESM.domain.User;
 import The.Geeks.RESM.services.UserService;
 import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
-@RequestMapping("/api/login")
+@RequiredArgsConstructor
+@RequestMapping("/api")
 @Slf4j
-
 public class UserResource {
     private final UserService userService;
 
     public static final String APPLICATION_JSON_VALUE = "applicaion/json";
 
-    public UserResource(UserService userServices) {
-        this.userService = userServices;
-    }
+    
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
@@ -74,7 +73,7 @@ public class UserResource {
     }
 
     
-    @GetMapping("/api/token/refresh/**")
+    @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
 
@@ -101,6 +100,7 @@ public class UserResource {
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
             } catch (Exception exception) {
+                log.error("Error logging in:{}",exception.getMessage());
                 response.setHeader("error", exception.getMessage());
                 response.setStatus(FORBIDDEN.value());
                 Map<String, String> error = new HashMap<>();
@@ -118,7 +118,7 @@ public class UserResource {
 
     }
 
-}
+
 
 @Data
 @Setter
@@ -128,12 +128,7 @@ class RoleToUserForm {
     private String username;
     private String roleName;
 
-    public String getUsername() {
-        return this.username;
-    }
+   
 
-    public String getRoleName() {
-        return this.roleName;
-    }
 
-}
+}}

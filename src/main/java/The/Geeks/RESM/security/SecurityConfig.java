@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import The.Geeks.RESM.filter.CostomAuthorizationFilter;
 import The.Geeks.RESM.filter.CustomAuthenticationFilter;
+import The.Geeks.RESM.filter.CustomAuthorizationFilter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     // // this constractors because i deal with final value with intializ
-   
-
+  
      private final BCryptPasswordEncoder bcryptPasswordEncoder;
 
     
@@ -46,14 +45,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // http.authorizeRequests().anyRequest().permitAll();
         //"/api/login/**", "/api/token/refresh/**"
-        http.authorizeRequests().antMatchers("/api/login/**,/api/v1/**,/api/token/refresh/**" ) .permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers("/api/login/**","/api/token/refresh/**","/api/users/**" ) .permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/**").hasAnyAuthority("ROLE_USER");
-
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
-        http.addFilterBefore( new CostomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore( new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
    
 
