@@ -21,18 +21,13 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-@NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
     // // this constractors because i deal with final value with intializ
-    public SecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bcryptPasswordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.bcryptPasswordEncoder = bcryptPasswordEncoder;
-    }
+   
 
      private final BCryptPasswordEncoder bcryptPasswordEncoder;
 
