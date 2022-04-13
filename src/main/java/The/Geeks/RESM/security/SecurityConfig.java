@@ -1,10 +1,9 @@
 package The.Geeks.RESM.security;
 
-import The.Geeks.RESM.filter.CustomAuthorizationFilter;
-import The.Geeks.RESM.filter.CustomAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,18 +13,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import The.Geeks.RESM.filter.CustomAuthenticationFilter;
+import The.Geeks.RESM.filter.CustomAuthorizationFilter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
+    // // this constractors because i deal with final value with intializ
   
-
      private final BCryptPasswordEncoder bcryptPasswordEncoder;
 
     
@@ -43,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // http.authorizeRequests().anyRequest().permitAll();
         //"/api/login/**", "/api/token/refresh/**"
-        http.authorizeRequests().antMatchers("/api/login/**,/api/token/refresh/**" ) .permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers("/api/login/**","/api/token/refresh/**","/api/users/**" ) .permitAll();
+      //  http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().anyRequest().authenticated();
@@ -55,10 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    @Bean
+    @Bean 
     @Override
-    public org.springframework.security.authentication.AuthenticationManager authenticationManagerBean() throws java.lang.Exception {
-     return super.authenticationManagerBean();
-   }
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
 }
