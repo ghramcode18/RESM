@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import The.Geeks.RESM.domain.User;
+
 @Entity
 @Table(name = "estates")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -37,15 +39,14 @@ public class EstatesEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sale_date;
 
-    @ManyToMany(targetEntity = UserEntity.class)
+    @ManyToMany(targetEntity = User.class)
     @JoinTable(name = "users_estates", joinColumns = @JoinColumn(name = "estates_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<UserEntity> list_Estate;
+    private List<User> list_Estate;
 
     public EstatesEntity() {
     }
 
-    public EstatesEntity(Integer id, String buyerName, String propertyName, double sellingPrice, double price,
-            Integer sharesNumber, Date sale_date, List<UserEntity> list_Estate) {
+    public EstatesEntity(Integer id, String buyerName, String propertyName, double sellingPrice, double price, Integer sharesNumber, Date sale_date, List<User> list_Estate) {
         this.id = id;
         this.buyerName = buyerName;
         this.propertyName = propertyName;
@@ -112,11 +113,11 @@ public class EstatesEntity {
         this.sale_date = sale_date;
     }
 
-    public List<UserEntity> getList_Estate() {
+    public List<User> getList_Estate() {
         return this.list_Estate;
     }
 
-    public void setList_Estate(List<UserEntity> list_Estate) {
+    public void setList_Estate(List<User> list_Estate) {
         this.list_Estate = list_Estate;
     }
 
@@ -155,7 +156,7 @@ public class EstatesEntity {
         return this;
     }
 
-    public EstatesEntity list_Estate(List<UserEntity> list_Estate) {
+    public EstatesEntity list_Estate(List<User> list_Estate) {
         setList_Estate(list_Estate);
         return this;
     }
@@ -168,12 +169,7 @@ public class EstatesEntity {
             return false;
         }
         EstatesEntity estatesEntity = (EstatesEntity) o;
-        return Objects.equals(id, estatesEntity.id) && Objects.equals(buyerName, estatesEntity.buyerName)
-                && Objects.equals(propertyName, estatesEntity.propertyName)
-                && sellingPrice == estatesEntity.sellingPrice && price == estatesEntity.price
-                && Objects.equals(sharesNumber, estatesEntity.sharesNumber)
-                && Objects.equals(sale_date, estatesEntity.sale_date)
-                && Objects.equals(list_Estate, estatesEntity.list_Estate);
+        return Objects.equals(id, estatesEntity.id) && Objects.equals(buyerName, estatesEntity.buyerName) && Objects.equals(propertyName, estatesEntity.propertyName) && sellingPrice == estatesEntity.sellingPrice && price == estatesEntity.price && Objects.equals(sharesNumber, estatesEntity.sharesNumber) && Objects.equals(sale_date, estatesEntity.sale_date) && Objects.equals(list_Estate, estatesEntity.list_Estate);
     }
 
     @Override
@@ -184,15 +180,16 @@ public class EstatesEntity {
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
-                ", buyerName='" + getBuyerName() + "'" +
-                ", propertyName='" + getPropertyName() + "'" +
-                ", sellingPrice='" + getSellingPrice() + "'" +
-                ", price='" + getPrice() + "'" +
-                ", sharesNumber='" + getSharesNumber() + "'" +
-                ", sale_date='" + getSale_date() + "'" +
-                ", list_Estate='" + getList_Estate() + "'" +
-                "}";
+            " id='" + getId() + "'" +
+            ", buyerName='" + getBuyerName() + "'" +
+            ", propertyName='" + getPropertyName() + "'" +
+            ", sellingPrice='" + getSellingPrice() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", sharesNumber='" + getSharesNumber() + "'" +
+            ", sale_date='" + getSale_date() + "'" +
+            ", list_Estate='" + getList_Estate() + "'" +
+            "}";
     }
+
 
 }

@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import The.Geeks.RESM.domain.User;
 import The.Geeks.RESM.dto.EstatesDto;
 import The.Geeks.RESM.dto.UserDto;
 import The.Geeks.RESM.entity.EstatesEntity;
-import The.Geeks.RESM.entity.UserEntity;
 import The.Geeks.RESM.exception.EstatesException;
 import The.Geeks.RESM.exception.UserException;
 import The.Geeks.RESM.repositories.EstatesRepo;
-import The.Geeks.RESM.repositories.UserEntityRepo;
+import The.Geeks.RESM.repositories.UserRepo;
 
 @Aspect
 @Component
@@ -51,7 +51,7 @@ public class EstatesServicesImp implements EstatesServices {
     EstatesRepo estatesRepo;
 
     @Autowired
-    UserEntityRepo userRepo;
+    UserRepo userRepo;
 
     @Override
     public Object setEstateToUser(Integer userId, Integer estateId) {
@@ -59,10 +59,10 @@ public class EstatesServicesImp implements EstatesServices {
         EstatesEntity estateEntity;
         estateEntity = estatesRepo.findById(estateId)
                 .orElseThrow(() -> new EstatesException("no estate with this id"));
-        UserEntity userEntity;
+        User userEntity;
         userEntity = userRepo.findById(userId).orElseThrow(() -> new UserException("no user with this id"));
 
-        List<UserEntity> userEntities = estateEntity.getList_Estate();
+        List<User> userEntities = estateEntity.getList_Estate();
 
         int i = userEntities.stream().filter((user) -> user.getId().equals(userEntity.getId()))
                 .toList().size();
@@ -79,10 +79,10 @@ public class EstatesServicesImp implements EstatesServices {
         EstatesEntity estateEntity;
         estateEntity = estatesRepo.findById(estatesDto.getId())
                 .orElseThrow(() -> new EstatesException("no estate with this id"));
-        UserEntity userEntity;
+        User userEntity;
         userEntity = userRepo.findById(userId).orElseThrow(() -> new UserException("no user with this id"));
 
-        List<UserEntity> userEntities = estateEntity.getList_Estate();
+        List<User> userEntities = estateEntity.getList_Estate();
         int i = userEntities.stream().filter((user) -> user.getId().equals(userEntity.getId()))
                 .toList().size();
         if (i == 0)
@@ -127,7 +127,7 @@ public class EstatesServicesImp implements EstatesServices {
     @Override
     public UserDto sale(Integer uid, Integer estateID) {
 
-        UserEntity uentity = userRepo.findById(uid)
+        User uentity = userRepo.findById(uid)
                 .orElseThrow(() -> new UserException("no user with this id"));
 
         EstatesEntity estateEntity = estatesRepo.findById(estateID)
@@ -135,12 +135,10 @@ public class EstatesServicesImp implements EstatesServices {
         List<EstatesEntity> estateiesEntity = new ArrayList<>();
         estateiesEntity.add(estateEntity);
 
-        uentity.estates(estateiesEntity);
-        userRepo.save(uentity);
         return UserEntityToUserDto(uentity);
     }
 
-    private UserDto UserEntityToUserDto(UserEntity uentity) {
+    private UserDto UserEntityToUserDto(User uentity) {
         UserDto userDto = new UserDto();
         userDto.password(uentity.getPassword())
                 .userName(uentity.getUsername())

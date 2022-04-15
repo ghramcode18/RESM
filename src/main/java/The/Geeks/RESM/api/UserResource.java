@@ -31,6 +31,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import The.Geeks.RESM.domain.Role;
 import The.Geeks.RESM.domain.User;
 import The.Geeks.RESM.services.UserService;
+import The.Geeks.RESM.services.UserServicesImp;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -39,11 +40,12 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api")
+@RequiredArgsConstructor
+
 @Slf4j
 public class UserResource {
-    private final UserService userService;
+    private final UserServicesImp userService;
 
     public static final String APPLICATION_JSON_VALUE = "applicaion/json";
 
