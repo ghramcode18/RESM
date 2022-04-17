@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,20 +27,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserServicesImp implements UserService, UserDetailsService {
 
+    @Autowired
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
 
     private final PasswordEncoder passwordEncoder;    
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    public UserRepo getUserRepo() {
-        return userRepo;
-    }
-
+  
     @Override
     public void addRoleToUser(String username, String roleName) {
         log.info("Adding role {} to ",roleName ,username);
@@ -81,12 +75,19 @@ public class UserServicesImp implements UserService, UserDetailsService {
         if (user == null) {log.error("user not found in the database");
             throw new UsernameNotFoundException("user not found in the database");
 
-        } else { log.error("user found in the database:{}",username);}
+        } else { log.info("user found in the database :{}",username);
+    
+    
+               }
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+            user.getRoles().forEach(role -> 
+            {authorities.add(new SimpleGrantedAuthority(role.getName()));
+            });
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                     authorities);
         }
+
+
     }
 
 
