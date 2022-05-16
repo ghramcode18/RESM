@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import The.Geeks.RESM.domain.Role;
 import The.Geeks.RESM.domain.User;
+import The.Geeks.RESM.repositories.UserRepo;
 import The.Geeks.RESM.services.UserService;
 import lombok.Data;
 import lombok.Getter;
@@ -44,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserResource {
     private final UserService userService;
-
+    private UserRepo userRepo;
     public static final String APPLICATION_JSON_VALUE = "applicaion/json";
 
     
@@ -118,8 +120,36 @@ public class UserResource {
 
     }
 
+// @RequestMapping("/testInteger")
+//     public String genint(User user) {
+//         Random random ;
+        
+//         int intRange;
+//         try {
 
 
+//             for (int i = 0; i < 10; i++) {
+//                 intRange = generateRandomIntIntRange(1000, 10000);
+//                 String num = Integer.toString(intRange);
+
+//                 random = new Random();
+//                 user.setNum(num);
+//                 userRepo.save(user);
+//             }
+//         } catch (Exception e) {
+//             // TODO Auto-generated catch block
+//             e.printStackTrace();
+//         }
+        
+//         return user.getNum();
+        
+//     }
+
+//     public static int generateRandomIntIntRange(int min, int max) {
+//         Random r = new Random();
+//         return r.nextInt((max - min) + 1) + min;
+
+//     }
 @Data
 @Setter
 @Getter
