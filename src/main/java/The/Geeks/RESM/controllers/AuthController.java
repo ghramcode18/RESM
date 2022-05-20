@@ -3,6 +3,7 @@ package The.Geeks.RESM.controllers;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -127,9 +128,12 @@ public class AuthController {
     }
 
     user.setRoles(roles);
-    userRepository.save(user);
-
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+     String zipCode = genint(user);
+     user.setZipCode(zipCode);
+     userRepository.save(user);
+     return ResponseEntity.ok().body(user);
+     //.ok(new MessageResponse("User registered successfully!"));
+     
   }
 
   @PostMapping("/signout")
@@ -142,5 +146,34 @@ public class AuthController {
     ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));
+  }
+
+  @RequestMapping("/testInteger")
+  public String genint(User user) {
+
+  int intRange;
+  try {
+
+  for (int i = 0; i < 10; i++) {
+  intRange = generateRandomIntIntRange(1000, 10000);
+  String num = Integer.toString(intRange);
+
+   Random random = new Random();
+   user.setZipCode(num);
+   userRepository.save(user);
+  }
+  } catch (Exception e) {
+  // TODO Auto-generated catch block
+  e.printStackTrace();
+  }
+
+  return user.getZipCode();
+
+  }
+
+  public static int generateRandomIntIntRange(int min, int max) {
+  Random r = new Random();
+  return r.nextInt((max - min) + 1) + min;
+
   }
 }
