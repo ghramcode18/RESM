@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import The.Geeks.RESM.domain.Role;
-import The.Geeks.RESM.domain.User;
+import The.Geeks.RESM.model.Role;
+import The.Geeks.RESM.model.User;
 
 @Service
 public interface UserService {
