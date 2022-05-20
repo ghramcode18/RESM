@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -21,12 +23,13 @@ public class UserDetailsImpl implements UserDetails {
   private String username;
 
   private String email;
-
+  
   @JsonIgnore
   private String password;
 
   private Collection<? extends GrantedAuthority> authorities;
 
+ 
   public UserDetailsImpl(Long id, String username, String email, String password,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
@@ -45,7 +48,7 @@ public class UserDetailsImpl implements UserDetails {
         user.getId(), 
         user.getUsername(), 
         user.getEmail(),
-        user.getPassword(), 
+        user.getPassword(),
         authorities);
   }
 
@@ -101,4 +104,9 @@ public class UserDetailsImpl implements UserDetails {
     UserDetailsImpl user = (UserDetailsImpl) o;
     return Objects.equals(id, user.id);
   }
+
+
+ 
+
+
 }

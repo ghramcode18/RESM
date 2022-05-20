@@ -41,7 +41,6 @@ private Long id;
 @Size(max = 20)
 private String username;
 
-@NotBlank
 @Size(max = 50)
 @Email
 private String email;
@@ -49,6 +48,8 @@ private String email;
 @NotBlank
 @Size(max = 120)
 private String password;
+
+private Boolean status;
 
 @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles", 
@@ -64,12 +65,22 @@ private String password;
      this.password = password;
   }
 
-   public User(Long id, String username, String email, String password, Set<Role> roles) {
+   public User(Long id, String username, String email, String password, Set<Role> roles,Boolean status) {
       this.id = id;
       this.username = username;
       this.email = email;
       this.password = password;
       this.roles = roles;
+      this.status = status;
+
+   }
+   
+   public User( String username, String email, String password, Boolean status) {
+      this.username = username;
+      this.email = email;
+      this.password = password;
+      this.status = status;
+
    }
 
 }

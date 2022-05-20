@@ -2,6 +2,7 @@ package The.Geeks.RESM.controllers;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,10 +56,13 @@ public class AuthController {
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    String userName = loginRequest.getUsername();
+    Optional<User> user  = userRepository.findByUsername(userName);
+    user.get().setStatus(true);
+    userRepository.save(user.get());
 
     Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -68,7 +72,7 @@ public class AuthController {
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
-
+    
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
         .body(new UserInfoResponse(userDetails.getId(),
                                    userDetails.getUsername(),
@@ -89,7 +93,8 @@ public class AuthController {
     // Create new user's account
     User user = new User(signUpRequest.getUsername(),
                          signUpRequest.getEmail(),
-                         encoder.encode(signUpRequest.getPassword()));
+                         encoder.encode(signUpRequest.getPassword()),
+                         signUpRequest.getStatus());
 
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
@@ -128,7 +133,12 @@ public class AuthController {
   }
 
   @PostMapping("/signout")
-  public ResponseEntity<?> logoutUser() {
+  public ResponseEntity<?> logoutUser(@Valid @RequestBody LoginRequest loginRequest) {
+    String userName = loginRequest.getUsername();
+    Optional<User> user = userRepository.findByUsername(userName);
+    user.get().setStatus(false);
+    userRepository.save(user.get());
+
     ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));

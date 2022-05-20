@@ -19,7 +19,20 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
-  
+    
+    private Boolean status;
+
+    public Boolean isStatus() {
+        return this.status;
+    }
+
+    public Boolean getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
     public String getUsername() {
         return username;
     }
