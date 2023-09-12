@@ -8,6 +8,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
@@ -73,6 +75,7 @@ public class EstatesServicesImp implements EstatesServices {
         return estatesEntityToestatesDto(estateEntity);
 
     }
+
     @Override
     public void setEstate(Integer userId, EstatesDto estatesDto) {
 
@@ -83,7 +86,7 @@ public class EstatesServicesImp implements EstatesServices {
         userEntity = userRepo.findById(userId).orElseThrow(() -> new UserException("no user with this id"));
 
         List<User> userEntities = estateEntity.getList_Estate();
-        int i = userEntities.stream().filter((user) -> user.getId().equals(userEntity.getId()))
+        int i = ((Streamable<Order>) userEntities.stream().filter((user) -> user.getId().equals(userEntity.getId())))
                 .toList().size();
         if (i == 0)
             userEntities.add(userEntity);
